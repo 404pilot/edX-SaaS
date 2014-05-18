@@ -10,6 +10,7 @@ class BookInStock
 		raise ArgumentError unless !isbn.empty? and price>0
 		@isbn = isbn
 		@price = price
+		# @isbn,@price = isbn,price
 	end
 
 	def price_as_string
