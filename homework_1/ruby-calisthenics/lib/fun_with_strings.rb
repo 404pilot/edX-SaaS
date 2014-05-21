@@ -6,30 +6,20 @@ module FunWithStrings
   end
 
   def count_words
-    words = self.downcase.strip.split(/\W+/)
-    keys = words.uniq
-
-    result = Hash.new
-
-    keys.each { |x| result.store(x, words.count(x)) }
-
-    result
+    all_words = self.downcase.strip.split(/\W+/)
+    
+    all_words.uniq.reduce(Hash.new) { |result,word| result.merge({word => all_words.count(word)}) }
   end
 
   def anagram_groups
     words = self.downcase.strip.split(/\W+/)
 
-    word_with_sortedChars = Hash.new
+    # {"nba"=>"abn"}
+    word_with_sortedChars = words.reduce(Hash.new) {| acc, word| acc.merge({word => word.chars.sort.join}) }
 
-    words.each { |x| word_with_sortedChars.store(x, x.chars.sort.join) }
-
-    allChars = word_with_sortedChars.values.uniq
-
-    result = Array.new
-
-    allChars.each { |x| result.push(word_with_sortedChars.map {|k,v| v==x ? k:nil}.compact ) }
-
-    result
+    word_with_sortedChars.values.uniq.reduce(Array.new) do |result, sorted_chars|
+      result << word_with_sortedChars.map {|k,v| v==sorted_chars ? k:nil}.compact
+    end
   end
 end
 
