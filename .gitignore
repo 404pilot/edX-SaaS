@@ -35,3 +35,9 @@ build/
 
 # Mac
 .DS_Store
+
+# edx saas
+*/rails-intro/.bundle/
+*/rails-intro/db/
+*/rails-intro/log/
+*/rails-intro/tmp/
