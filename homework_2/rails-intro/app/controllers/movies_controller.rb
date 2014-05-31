@@ -11,11 +11,11 @@ class MoviesController < ApplicationController
 
     if !params[:ratings] or !params[:sortBy]
       # missing parameters
-      ratings = params[:ratings]? params[:ratings] : session[:ratings]
-      ratings = ratings ? ratings : @all_ratings
+      ratings = !!params[:ratings] ? params[:ratings] : session[:ratings]
+      ratings = !!ratings ? ratings : @all_ratings
 
-      sortBy = params[:sortBy]? params[:sortBy] : session[:sortBy]
-      sortBy = sortBy ? sortBy : ""
+      sortBy = !!params[:sortBy] ? params[:sortBy] : session[:sortBy]
+      sortBy = !!sortBy ? sortBy : ""
 
       session[:ratings] = ratings
       session[:sortBy] = sortBy
@@ -24,11 +24,11 @@ class MoviesController < ApplicationController
     end
     
     @sortBy = params[:sortBy]
-    @checked = params[:ratings].is_a?(Hash)? params[:ratings].keys : params[:ratings]
+    @checked = params[:ratings].is_a?(Hash) ? params[:ratings].keys : params[:ratings]
 
-    if @sortBy!="" && @checked
+    if @sortBy != "" && !!@checked
       @movies = Movie.find(:all, :conditions => {rating: @checked}, :order => @sortBy)
-    elsif @checked
+    elsif !!@checked
       @movies = Movie.find(:all, :conditions => {rating: @checked})
     elsif @sortBy != ""
       @movies = Movie.find(:all, :order => @sortBy)
