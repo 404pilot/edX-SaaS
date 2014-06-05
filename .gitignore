@@ -41,3 +41,6 @@ build/
 */rails-intro/db/
 */rails-intro/log/
 */rails-intro/tmp/
+*/bdd-cucumber/rottenpotatoes/log
+*/bdd-cucumber/rottenpotatoes/tmp
+*/bdd-cucumber/rottenpotatoes/.bundle
